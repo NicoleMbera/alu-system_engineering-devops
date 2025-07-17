@@ -1,18 +1,16 @@
 #!/usr/bin/env bash
-# Script to install and configure Nginx web server
+# Install and configure Nginx web server
 
-# Update package lists and install nginx with automatic yes to prompts
-apt-get update
-apt-get install -y nginx
+sudo apt-get update
+sudo apt-get install -y nginx
 
-# Create a simple HTML page with the required string
-echo "Holberton School" > /var/www/html/index.html
+# Overwrite default page with required text
+echo 'Holberton School' | sudo tee /var/www/html/index.html
 
-# Ensure nginx is running and restart it
-service nginx start
+# Start nginx
+sudo service nginx start
 
-# Make sure nginx starts on boot
-update-rc.d nginx defaults
-
+# Enable nginx on boot (non-systemd fallback)
+sudo update-rc.d nginx defaults
 # Verify the content is correct
 curl localhost 
