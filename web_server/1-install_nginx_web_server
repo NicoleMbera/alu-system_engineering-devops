@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# Install and configure Nginx web server
+# Install nginx and configure default root page
 
-sudo apt-get update
-sudo apt-get install -y nginx
+# Exit if any command fails
+set -e
 
-# Overwrite default page with required text
-echo 'Holberton School' | sudo tee /var/www/html/index.html
+# Update and install nginx
+apt-get update -y
+apt-get install nginx -y
 
-# Start nginx
-sudo service nginx start
+# Overwrite the default HTML page with the required text
+echo 'Holberton School for the win!' > /var/www/html/index.html
 
-# Enable nginx on boot (non-systemd fallback)
-sudo update-rc.d nginx defaults
-# Verify the content is correct
-curl localhost 
+# Restart nginx using service command (not systemctl)
+service nginx restart
+
